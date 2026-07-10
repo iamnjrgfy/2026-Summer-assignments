@@ -4,11 +4,14 @@ package org.example;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        KeelungSighsCrawler crawler = new KeelungSighsCrawler();
-        crawler.getItems("qidu");
-        Sight[] sights = crawler.getItems("qidu");
-        for (Sight s : sights) {
-            System.out.println(s);
+        String[] zones = {"qidu","zhongshan","zhongzheng","renai","anle","xinyi","nuannuan"};
+        for (String zone : zones) {
+            KeelungSighsCrawler crawler = new KeelungSighsCrawler();
+            Sight[] sights = crawler.getItems(zone);
+            for (Sight s : sights) {
+                System.out.println(s);
+            }
+            System.out.println();
         }
     }
 }

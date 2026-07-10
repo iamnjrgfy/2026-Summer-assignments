@@ -1,8 +1,8 @@
 package org.example;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 
@@ -27,7 +27,12 @@ public class KeelungSighsCrawler {
                     s.setZone(doc.select(".this_title").text());
                     s.setCategory(Seconddoc.select("cite strong").text());
                     Element imgElement = Seconddoc.select("#galleria .gpic img").first();
-                    String imgUrl = imgElement.attr("src");
+                    String imgUrl;
+                    if (imgElement != null) {
+                        imgUrl = imgElement.attr("src");
+                    } else {
+                        imgUrl = "no PhotoUrl";
+                    }
                     s.setPhotoURL(imgUrl);
                     s.setDescription(Seconddoc.select(".text").text());
                     s.setAddress(Seconddoc.select("#point_data span").text());

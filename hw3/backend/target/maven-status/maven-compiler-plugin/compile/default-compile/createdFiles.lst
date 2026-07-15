@@ -1,0 +1,5 @@
+com\example\rest_service\KeelungSightsCrawler.class
+com\example\rest_service\RestServiceApplication.class
+com\example\rest_service\SightService.class
+com\example\rest_service\Sight.class
+com\example\rest_service\SightController.class

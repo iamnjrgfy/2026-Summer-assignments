@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class SightController {
@@ -15,6 +16,7 @@ public class SightController {
         this.sightService = sightService;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("api/sights/{zone}")
     public List<Sight> getSight(@PathVariable String zone) {
         return sightService.getSightByZone(zone);

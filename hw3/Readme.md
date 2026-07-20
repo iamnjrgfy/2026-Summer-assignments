@@ -38,7 +38,10 @@
 
 範例：GET [http://127.0.0.1:8080/api/sights/qidu](http://127.0.0.1:8080/api/sights/qidu)
 
-### 7. 已知限制 (技術備註)
+### 7. 截圖
+* ![網站](./doc/image/image1.png)
+
+### 8. 已知限制 (技術備註)
 + 瀏覽器安全性限制：由於瀏覽器「同源政策 (Same-Origin Policy)」限制，直接以 file:/// 協定開啟前端檔案會導致 AJAX 請求失敗。請務必透過 Web Server 工具 (如 Live Server) 執行。
 
 + CORS 配置：後端已設定 origins = "*"，以確保前端在不同開發環境 (Port) 下皆能正常存取 API。

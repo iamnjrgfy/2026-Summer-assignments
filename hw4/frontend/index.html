@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>基隆景點瀏覽器</title>
+
+    <style> 
+        .collapse .card-body img {
+            max-height: 250px;
+            width: 100%;
+            object-fit: cover; 
+        }
+
+        .collapse {
+            transition: height 0.35s ease;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mt-auto {
+            margin-top: auto;
+        }
+    </style>
+
+
+
+
+</head>
+<body>
+    <div class="container px-4">
+        <div>
+            <h1>基隆景點瀏覽器</h1>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-primary w-100" value="qidu">七堵區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-secondary w-100" value="zhongshan">中山區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-success w-100" value="zhongzheng">中正區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-danger w-100" value="renai">仁愛區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-warning w-100" value="anle">安樂區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-info w-100" value="xinyi">信義區</button>
+            </div>
+            <div class="col-12 col-md"> 
+                <button type = "button" class = "btn btn-outline-dark w-100" value="nuannuan">暖暖區</button>
+            </div>
+        </div>   
+        <hr>
+        <div id = "sight">
+            <p>請點選上方按鈕來瀏覽景點</p>
+        </div>     
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("button").click(function() {
+                $("#sight").empty();
+                $("#sight").html("<p>載入資料中...</p>");
+                let zone = this.value;
+                $.ajax({
+                    url : `http://127.0.0.1:8080/api/sights/${zone}`,
+                    type : "GET",
+                    dataType : "json",
+                    success: function(response) {
+                        $("#sight").html('<div class = "row row-cols-1 row-cols-md-3 g-4"></div>');
+                        
+                        $.each(response, function(index, value) {
+                            let mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value.address)}`
+                            let targetId = "detail-" + index; 
+                            let content = `
+                                <div class="card shadow-sm mb-3 h-100">
+                                    <div class="card-body d-flex flex-column">
+                                        <h2 class="card-title h5">${value.sightName}</h2>
+                                        <hr>
+                                        <ul class="list-unstyled text-muted small">
+                                            <li><strong>分類：</strong>${value.category}</li>
+                                            <li><strong>地區：</strong>${value.zone}</li>
+                                        </ul>
+                                        
+                                        <div class="mt-auto">
+                                            <p class="mb-2"><strong>地址：</strong> ${value.address}</p>
+                                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value.address)}" 
+                                            target="_blank" class="btn btn-sm btn-outline-success w-100 mb-3">
+                                            點我過去
+                                            </a>
+                                            <button class="btn btn-primary w-100" data-bs-toggle="collapse" data-bs-target="#${targetId}">
+                                                顯示詳細資訊
+                                            </button>
+                                            <div class="collapse mt-3" id="${targetId}">
+                                                <div class="card card-body">
+                                                    <img src="${value.photoUrl}" onerror="this.src='https://via.placeholder.com/500x300?text=圖片無法顯示';" class="img-fluid mb-3">
+                                                    <p>${value.description}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $("#sight .row").append(content);
+                        });
+                    },
+                    error:function() {
+                        $("#sight").html("<p>讀取失敗，請檢查後端API是否正常。</p>")
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

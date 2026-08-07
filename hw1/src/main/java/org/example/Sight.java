@@ -3,7 +3,6 @@ package org.example;
 public class Sight implements java.io.Serializable{
     private String sightName = null;
     private String zone = null;
-    private String category = null;
     private String photoURL = null;
     private String address = null;
     private String description = null;
@@ -17,10 +16,6 @@ public class Sight implements java.io.Serializable{
 
     public String getZone() {
             return zone;
-    }
-
-    public String getCategory() {
-        return category;
     }
 
     public String getPhotoURL() {
@@ -43,10 +38,6 @@ public class Sight implements java.io.Serializable{
         this.zone = zone;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public void setPhotoURL(String photoURL) {
         this.photoURL = photoURL;
     }
@@ -63,7 +54,6 @@ public class Sight implements java.io.Serializable{
     public String toString() {
         return "SightName: " + sightName + "\n" +
                 "Zone: " + zone + "\n" +
-                "Category: " + category + "\n" +
                 "PhotoURL: " + photoURL + "\n" +
                 "Address: " + address + "\n" +
                 "Description: " + description + "\n";

@@ -8,7 +8,6 @@ public class Sight implements java.io.Serializable {
     private String Id;
     private String sightName = null;
     private String zone = null;
-    private String category = null;
     private String photoUrl = null;
     private String address = null;
     private String description = null;
@@ -21,10 +20,6 @@ public class Sight implements java.io.Serializable {
 
     public String getZone() {
         return this.zone;
-    }
-
-    public String getCategory() {
-        return this.category;
     }
 
     public String getPhotoUrl() {
@@ -47,10 +42,6 @@ public class Sight implements java.io.Serializable {
         this.zone = zone;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
@@ -68,7 +59,6 @@ public class Sight implements java.io.Serializable {
         return "Sight{" +
                 "sightName='" + this.sightName + '\'' +
                 ", zone='" + this.zone + '\'' +
-                ", category='" + this.category + '\'' +
                 ", photoUrl='" + this.photoUrl + '\'' +
                 ", address='" + this.address + '\'' +
                 ", description='" + this.description + '\'' +

@@ -23,11 +23,12 @@ public class SightService {
         zoneMap.put("nuannuan", "暖暖區");
 
         KeelungSightsCrawler crawler = new KeelungSightsCrawler();
-        String[] zones = {"qidu", "zhongshan", "zhongzheng", "renai", "anle", "xinyi", "nuannuan"};
-        for (String zone : zones) {
-            Sight[] sights = crawler.getItems(zone);
-            for (Sight sight : sights) {
-                if (sight != null) allsights.add(sight);
+
+        String[] towns = {"Town1-1","Town1-2","Town1-3","Town1-4","Town1-5","Town1-6","Town1-7"};
+        for (String town : towns) {
+            Sight[] sights = crawler.getItems(town);
+            for (Sight s : sights) {
+                if (s != null) allsights.add(s);
             }
         }
     }

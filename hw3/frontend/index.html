@@ -91,13 +91,12 @@
                                         <h2 class="card-title h5">${value.sightName}</h2>
                                         <hr>
                                         <ul class="list-unstyled text-muted small">
-                                            <li><strong>分類：</strong>${value.category}</li>
                                             <li><strong>地區：</strong>${value.zone}</li>
                                         </ul>
                                         
                                         <div class="mt-auto">
                                             <p class="mb-2"><strong>地址：</strong> ${value.address}</p>
-                                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value.address)}" 
+                                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value.sightName)}" 
                                             target="_blank" class="btn btn-sm btn-outline-success w-100 mb-3">
                                             點我過去
                                             </a>

@@ -76,7 +76,7 @@
                 $("#sight").html("<p>載入資料中...</p>");
                 let zone = this.value;
                 $.ajax({
-                    url : `http://127.0.0.1:8080/api/sights/${zone}`,
+                    url : `api/sights/${zone}`,
                     type : "GET",
                     dataType : "json",
                     success: function(response) {

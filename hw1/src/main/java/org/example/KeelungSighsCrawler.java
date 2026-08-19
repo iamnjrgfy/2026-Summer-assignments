@@ -7,17 +7,18 @@ import org.jsoup.select.Elements;
 
 
 public class KeelungSighsCrawler {
-    public KeelungSighsCrawler() {}
+    public KeelungSighsCrawler() {
+    }
 
     public Sight[] getItems(String town) {
         String url = "https://okgo.tw/buty/keelung.html";
 
         try {
             Document doc = Jsoup.connect(url).get();
-            Elements links = doc.select("#"+ town + "  ul  li a[href]");
+            Elements links = doc.select("#" + town + "  ul  li a[href]");
             Sight[] sights = new Sight[links.size()];
 
-            for (int i = 0;i < links.size();++i) {
+            for (int i = 0; i < links.size(); ++i) {
                 String detailUrl = links.get(i).absUrl("href");
                 try {
                     Document detail = Jsoup.connect(detailUrl).get();
@@ -31,9 +32,9 @@ public class KeelungSighsCrawler {
                     String address = "";
                     if (fullText.contains("地址：")) {
                         int startIndex = fullText.indexOf("地址：") + 3;
-                        int endIndex = fullText.indexOf("文章來源",startIndex);
+                        int endIndex = fullText.indexOf("文章來源", startIndex);
                         if (endIndex == -1) endIndex = startIndex;
-                        address = fullText.substring(startIndex,endIndex).trim();
+                        address = fullText.substring(startIndex, endIndex).trim();
                     }
                     s.setAddress(address);
 
@@ -51,14 +52,14 @@ public class KeelungSighsCrawler {
                     s.setZone(detail.select(".sec3 strong a[href*=town]").text());
 
                     sights[i] = s;
-                }catch (Exception e) {
+                } catch (Exception e) {
                     System.err.println(e.getMessage());
                     return new Sight[0];
                 }
             }
             return sights;
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
             return new Sight[0];
         }

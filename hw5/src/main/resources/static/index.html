@@ -83,7 +83,7 @@
                         $("#sight").html('<div class = "row row-cols-1 row-cols-md-3 g-4"></div>');
                         
                         $.each(response, function(index, value) {
-                            let targetId = "detail-" + index; 
+                            let targetId = "detail-" + index;
                             let content = `
                                 <div class="card shadow-sm mb-3 h-100">
                                     <div class="card-body d-flex flex-column">
@@ -104,7 +104,7 @@
                                             </button>
                                             <div class="collapse mt-3" id="${targetId}">
                                                 <div class="card card-body">
-                                                    <img src="${value.photoUrl}" onerror="this.src='https://via.placeholder.com/500x300?text=圖片無法顯示';" class="img-fluid mb-3">
+                                                    <img src="${value.photoUrl}" onerror="this.src='https://dummyimage.com/600x400/706a70/fff&text=default+photo';" class="img-fluid mb-3">
                                                     <p>${value.description}</p>
                                                 </div>
                                             </div>

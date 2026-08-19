@@ -39,9 +39,6 @@ public class KeelungSightsCrawler {
                     }
                     s.setAddress(address);
 
-                    //set description
-                    s.setDescription(detail.select("div.sec3 > div:not(#FontSize):not(#Buty_View_PicSource)").text());
-
                     //set photo url
                     Element photoItem = detail.select(".sec3 #Buty_View_PicSource .pic img").first();
                     if (photoItem != null) {
@@ -49,6 +46,10 @@ public class KeelungSightsCrawler {
                     } else {
                         s.setPhotoUrl("-");
                     }
+
+                    //set description
+                    s.setDescription(detail.select("div.sec3 > div:not(#FontSize):not(#Buty_View_PicSource)").text());
+
                     //set zone
                     s.setZone(detail.select(".sec3 strong a[href*=town]").text());
 

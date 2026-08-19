@@ -1,4 +1,6 @@
 package com.example.hw5;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 //import java.util.ArrayList;
@@ -31,7 +33,11 @@ public class SightService {
 
     public List<Sight> getSightByZone(String zoneKey) {
         String zone = zoneMap.get(zoneKey);
-        return repository.findByZone(zone);
+        if (zone == null) return null;
+
+        List<Sight> sights = repository.findByZone(zone);
+        return (sights == null || sights.isEmpty()) ? null : sights;
+
     }
 
     public void initDatabase() {
@@ -53,18 +59,4 @@ public class SightService {
             repository.saveAll(Arrays.asList(sights));
         }
     }
-
-//        if (repository.count() == 0) {
-//            String[] zones = {"qidu", "zhongshan", "zhongzheng", "renai", "anle", "xinyi", "nuannuan"};
-//            for (String zone : zones) {
-//                Sight[] sights = crawler.getItems(zone);
-//                repository.saveAll(Arrays.asList(sights));
-//            }
-//            String[] towns = {"Town1-1", "Town1-2", "Town1-3", "Town1-4", "Town1-5", "Town1-6", "Town1-7"};
-//            for (String town : towns) {
-//                Sight[] sights = crawler.getItems(town);
-//                repository.saveAll(Arrays.asList(sights));
-//            }
-//        }
-
 }

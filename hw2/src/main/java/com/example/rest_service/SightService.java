@@ -35,11 +35,14 @@ public class SightService {
     public List<Sight> getSightByZone(String zone) {
         List<Sight> filtered = new ArrayList<>();
         String target = zoneMap.get(zone);
+
+        if (target == null) return null;
+
         for (Sight sight : allsights) {
-            if (sight.getZone().contains(target)) {
+            if (sight.getZone() != null && sight.getZone().contains(target)) {
                 filtered.add(sight);
             }
         }
-        return filtered;
+        return filtered.isEmpty() ? null : filtered;
     }
 }
